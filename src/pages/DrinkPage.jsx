@@ -11,7 +11,10 @@ const DrinkPage = () => {
     const saved = localStorage.getItem("dailyGoal");
     return saved ? Number(saved) : 2000;
   });
-  const [selectedVolume, setSelectedVolume] = useState(null);
+  const [selectedVolume, setSelectedVolume] = useState(() => {
+    const saved = localStorage.getItem("selectedVolume");
+    return saved ? Number(saved) : 400;
+  });
   const [totalVolume, setTotalVolume] = useState(() => {
     const saved = localStorage.getItem("totalVolume");
     return saved ? Number(saved) : 0;
@@ -27,7 +30,8 @@ const DrinkPage = () => {
     localStorage.setItem("totalVolume", totalVolume.toString());
     localStorage.setItem("drinkLogs", JSON.stringify(drinkLogs));
     localStorage.setItem("dailyGoal", dailyGoal.toString());
-  }, [totalVolume, drinkLogs, dailyGoal]);
+    localStorage.setItem("selectedVolume", selectedVolume.toString());
+  }, [totalVolume, drinkLogs, dailyGoal, selectedVolume]);
 
   useEffect(() => {
     const lastAccessDate = localStorage.getItem("lastAccessDate");
@@ -46,12 +50,12 @@ const DrinkPage = () => {
 
   const handleLogDrink = () => {
     if (selectedVolume) {
-      const newTotal = totalVolume + Number(selectedVolume.name);
+      const newTotal = totalVolume + Number(selectedVolume);
       setTotalVolume(newTotal);
       setIsAnimating(true);
 
       const newLog = {
-        volume: selectedVolume.name,
+        volume: selectedVolume,
         timestamp: new Date().toISOString(),
       };
       setDrinkLogs([...drinkLogs, newLog]);

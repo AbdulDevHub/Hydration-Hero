@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { GoGear } from "react-icons/go";
 import DrinkSettings from "../drink_features/DrinkSettings";
 

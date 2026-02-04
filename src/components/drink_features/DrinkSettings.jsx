@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import SaveButton from "../drink_buttons/SaveButton";
 import DrinkSettingsHeader from "./drink_settings_components/DrinkSettingsHeader";
 import DailyVolumeGoal from "./drink_settings_components/DailyVolumeGoal";

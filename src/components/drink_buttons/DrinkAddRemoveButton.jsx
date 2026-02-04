@@ -1,4 +1,3 @@
-import React from "react";
 import { FaPlus } from "react-icons/fa6";
 import { RiDeleteBin6Line } from "react-icons/ri";
 

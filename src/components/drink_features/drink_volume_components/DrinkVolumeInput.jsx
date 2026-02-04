@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DrinkAddRemoveButton from "../../drink_buttons/DrinkAddRemoveButton";
 
 const DrinkVolumeInput = ({ volumes, setVolumes }) => {

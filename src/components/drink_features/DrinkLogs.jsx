@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getTimeAgo } from "../drink_utilities/timeUtils";
 import CheckLogsModal from "../drink_modals/CheckLogsModal";
 import LogsHeader from "./drink_logs_components/LogsHeader";
