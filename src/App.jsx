@@ -1,0 +1,13 @@
+import DrinkPage from "./pages/DrinkPage"
+
+function App() {
+  return (
+    <div className="flex items-center justify-center w-[300px] h-[500px] bg-[#000000]">
+      <div className="flex flex-col items-center justify-center w-[300px] h-[500px] bg-[#000000]">
+        <DrinkPage />
+      </div>
+    </div>
+  )
+}
+
+export default App
