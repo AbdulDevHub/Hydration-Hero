@@ -127,7 +127,7 @@ const DrinkPage = () => {
 
   return (
     <>
-      <div className="font-manrope flex flex-col h-[500px] w-[300px] bg-[#1a1a1a] overflow-hidden">
+      <div className="font-manrope flex flex-col h-[450px] w-[300px] bg-[#1a1a1a] overflow-hidden">
         <DrinkHeader
           showSettings={showSettings}
           setShowSettings={setShowSettings}
