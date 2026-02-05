@@ -1,5 +1,4 @@
-import DrinkSettingsButton from "./drink_buttons/DrinkSettingsButton";
-
+import { DrinkSettingsButton } from './DrinkButtons';
 const DrinkHeader = ({
   showSettings,
   setShowSettings,

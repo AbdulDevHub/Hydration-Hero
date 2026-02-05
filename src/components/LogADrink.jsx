@@ -1,6 +1,5 @@
-import DrinkLogs from "./drink_features/DrinkLogs";
-import LogDrinkButton from "./drink_buttons/LogDrinkButton";
-
+import DrinkLogs from "./DrinkLogs";
+import { LogDrinkButton } from './DrinkButtons';
 const LogADrink = ({
   handleLogDrink,
   selectedVolume,

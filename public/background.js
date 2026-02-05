@@ -1,4 +1,7 @@
 // background.js
+/** @type {Chrome} */
+const chrome = chrome || {};
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "startTimer") {
     const { title, message, duration } = request.payload;
