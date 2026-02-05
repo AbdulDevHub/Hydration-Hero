@@ -87,7 +87,7 @@ const DrinkPage = () => {
   const triggerCelebration = () => {
     const duration = 3 * 1000;
     const end = Date.now() + duration;
-    const colors = ["#1CABE3", "#EEF8FB", "#CFECF4"];
+    const colors = ["#1CABE3", "#1a1a1a", "#2d2d2d"];
 
     (function frame() {
       confetti({
@@ -127,7 +127,7 @@ const DrinkPage = () => {
 
   return (
     <>
-      <div className="font-manrope flex flex-col h-[500px] w-[300px] bg-[#F8FBFB] overflow-hidden">
+      <div className="font-manrope flex flex-col h-[500px] w-[300px] bg-[#1a1a1a] overflow-hidden">
         <DrinkHeader
           showSettings={showSettings}
           setShowSettings={setShowSettings}
@@ -135,7 +135,7 @@ const DrinkPage = () => {
           dailyGoal={dailyGoal}
         />
 
-        <h1 className="mt-2 text-center text-[#000000] font-semibold text-lg leading-tight tracking-[-0.015em]">
+        <h1 className="mt-2 text-center text-[#e5e5e5] font-semibold text-lg leading-tight tracking-[-0.015em]">
           Refresh and Own the Day
         </h1>
 

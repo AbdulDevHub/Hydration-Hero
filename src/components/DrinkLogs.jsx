@@ -6,8 +6,8 @@ import { CheckLogsButton } from "./DrinkButtons";
 
 // Logs Header Component
 const LogsHeader = () => (
-  <div className="flex-none p-4 border-b border-[#CFECF4] w-full">
-    <h2 className="text-[#000000] text-center text-base font-semibold leading-normal">
+  <div className="flex-none p-4 border-b border-[#2d2d2d] w-full">
+    <h2 className="text-[#e5e5e5] text-center text-base font-semibold leading-normal">
       Today&apos;s Drink Logs
     </h2>
   </div>
@@ -15,7 +15,7 @@ const LogsHeader = () => (
 
 // Empty Logs Message Component
 const EmptyLogsMsg = () => (
-  <div className="flex-1 flex flex-row gap-2 text-xs items-center justify-center text-[#4f8296] p-4 mb-7">
+  <div className="flex-1 flex flex-row gap-2 text-xs items-center justify-center text-[#94b8c4] p-4 mb-7">
     <LuHistory />
     <p>No drink logs recorded yet.</p>
   </div>
@@ -23,9 +23,9 @@ const EmptyLogsMsg = () => (
 
 // Individual Log Entry Component
 const LogEntry = ({ timestamp, drink, volume, getTimeAgo }) => (
-  <div className="flex items-center justify-between p-3 mb-2 bg-[#CFECF4] rounded-lg shadow-sm">
+  <div className="flex items-center justify-between p-3 mb-2 bg-[#2d2d2d] rounded-lg shadow-sm">
     <div className="flex items-center justify-between">
-      <div className="ml-2 text-[#4f8296] text-sm text-left">
+      <div className="ml-2 text-[#94b8c4] text-sm text-left">
         {getTimeAgo(timestamp)}
       </div>
       <div className="ml-14 text-right">
@@ -56,9 +56,9 @@ const LogsList = ({ logs, getTimeAgo }) => (
 
 // Total Volume Component
 const TotalLogsVolume = ({ volume }) => (
-  <div className="flex-none border-t border-[#CFECF4] p-4 w-full">
+  <div className="flex-none border-t border-[#2d2d2d] p-4 w-full">
     <div className="flex justify-between items-center">
-      <span className="text-[#4f8296] text-sm">Total Volume:</span>
+      <span className="text-[#94b8c4] text-sm">Total Volume:</span>
       <span className="text-[#1CABE3] font-bold">
         {(volume / 1000).toFixed(1)}L
       </span>
@@ -91,7 +91,7 @@ const DrinkLogs = ({ logs = [] }) => {
       <CheckLogsButton onClick={openModal} />
 
       <CheckLogsModal show={showModal} onClose={closeModal}>
-        <div className="flex flex-col justify-center h-[400px] items-center font-manrope font-medium bg-[#EEF8FB] rounded-lg">
+        <div className="flex flex-col justify-center h-[400px] items-center font-manrope font-medium bg-[#1a1a1a] rounded-lg">
           <LogsHeader />
 
           {logs.length === 0 ? (
