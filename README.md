@@ -55,10 +55,6 @@ Hydration Hero utilizes the following Chrome APIs:
 - Visual progress indicator showing daily completion percentage
 - Automatic daily reset at midnight
 
-<p align="center">
-    <img src="https://i.imgur.com/BITNl1q.gif" alt="Hydration Tracker GIF" style="width: 60%; height: auto;">
-</p>
-
 ### **Customizable Settings**
 
 - Set personalized daily hydration goals (500ml - 10,000ml)
@@ -87,13 +83,13 @@ cd Hydration-Hero
 ### **2. Install dependencies:**
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### **3. Build the extension:**
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 ### **4. Load the extension in Chrome:**
@@ -121,9 +117,9 @@ npm run build
 ### Available Scripts
 
 ```bash
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run preview  # Preview production build
+pnpm run dev      # Start development server
+pnpm run build    # Build for production
+pnpm run preview  # Preview production build
 ```
 
 ### Code Organization
