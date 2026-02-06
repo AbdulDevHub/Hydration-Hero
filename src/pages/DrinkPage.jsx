@@ -34,17 +34,22 @@ const DrinkPage = () => {
   }, [totalVolume, drinkLogs, dailyGoal, selectedVolume])
 
   useEffect(() => {
-    const lastAccessDate = localStorage.getItem("lastAccessDate")
-    const today = new Date().toDateString()
-
-    if (lastAccessDate !== today) {
-      localStorage.setItem("lastAccessDate", today)
-      if (lastAccessDate) {
-        setTotalVolume(0)
-        setDrinkLogs([])
-        localStorage.setItem("totalVolume", "0")
-        localStorage.setItem("drinkLogs", JSON.stringify([]))
-      }
+    const lastResetTime = localStorage.getItem("lastResetTime")
+    const now = new Date()
+    
+    // Calculate today's reset time (3 AM)
+    const todayReset = new Date()
+    todayReset.setHours(3, 0, 0, 0)
+    
+    const lastReset = lastResetTime ? new Date(lastResetTime) : null
+    
+    // If current time is past 3 AM and last reset was before today's 3 AM
+    if (now >= todayReset && (!lastReset || lastReset < todayReset)) {
+      localStorage.setItem("lastResetTime", now.toISOString())
+      setTotalVolume(0)
+      setDrinkLogs([])
+      localStorage.setItem("totalVolume", "0")
+      localStorage.setItem("drinkLogs", JSON.stringify([]))
     }
   }, [])
 
