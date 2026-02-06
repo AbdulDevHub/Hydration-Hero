@@ -51,7 +51,7 @@ const DrinkProgressCard = ({
             className={`text-[13px] font-bold leading-normal tracking-[0.015em] mt-4 ${
               calculateProgress() >= 100
                 ? "text-[#2d2d2d]"
-                : calculateProgress() >= 30
+                : calculateProgress() >= 25
                 ? "text-[#2d2d2d]"
                 : "text-[#94b8c4]"
             }`}

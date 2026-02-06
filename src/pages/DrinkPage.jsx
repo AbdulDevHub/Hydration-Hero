@@ -1,95 +1,95 @@
-import { useState, useEffect } from "react";
-import DrinkHeader from "../components/DrinkHeader";
-import DrinkProgressCard from "../components/DrinkProgressCard";
-import VolumeSelection from "../components/VolumeSelection";
-import LogADrink from "../components/LogADrink";
-import confetti from "canvas-confetti";
+import { useState, useEffect } from "react"
+import DrinkHeader from "../components/DrinkHeader"
+import DrinkProgressCard from "../components/DrinkProgressCard"
+import VolumeSelection from "../components/VolumeSelection"
+import LogADrink from "../components/LogADrink"
+import confetti from "canvas-confetti"
 
 const DrinkPage = () => {
-  const [showSettings, setShowSettings] = useState(false);
+  const [showSettings, setShowSettings] = useState(false)
   const [dailyGoal, setDailyGoal] = useState(() => {
-    const saved = localStorage.getItem("dailyGoal");
-    return saved ? Number(saved) : 2000;
-  });
+    const saved = localStorage.getItem("dailyGoal")
+    return saved ? Number(saved) : 2000
+  })
   const [selectedVolume, setSelectedVolume] = useState(() => {
-    const saved = localStorage.getItem("selectedVolume");
-    return saved ? Number(saved) : 400;
-  });
+    const saved = localStorage.getItem("selectedVolume")
+    return saved ? Number(saved) : 400
+  })
   const [totalVolume, setTotalVolume] = useState(() => {
-    const saved = localStorage.getItem("totalVolume");
-    return saved ? Number(saved) : 0;
-  });
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [showCelebration, setShowCelebration] = useState(false);
+    const saved = localStorage.getItem("totalVolume")
+    return saved ? Number(saved) : 0
+  })
+  const [isAnimating, setIsAnimating] = useState(false)
+  const [showCelebration, setShowCelebration] = useState(false)
   const [drinkLogs, setDrinkLogs] = useState(() => {
-    const saved = localStorage.getItem("drinkLogs");
-    return saved ? JSON.parse(saved) : [];
-  });
+    const saved = localStorage.getItem("drinkLogs")
+    return saved ? JSON.parse(saved) : []
+  })
 
   useEffect(() => {
-    localStorage.setItem("totalVolume", totalVolume.toString());
-    localStorage.setItem("drinkLogs", JSON.stringify(drinkLogs));
-    localStorage.setItem("dailyGoal", dailyGoal.toString());
-    localStorage.setItem("selectedVolume", selectedVolume.toString());
-  }, [totalVolume, drinkLogs, dailyGoal, selectedVolume]);
+    localStorage.setItem("totalVolume", totalVolume.toString())
+    localStorage.setItem("drinkLogs", JSON.stringify(drinkLogs))
+    localStorage.setItem("dailyGoal", dailyGoal.toString())
+    localStorage.setItem("selectedVolume", selectedVolume.toString())
+  }, [totalVolume, drinkLogs, dailyGoal, selectedVolume])
 
   useEffect(() => {
-    const lastAccessDate = localStorage.getItem("lastAccessDate");
-    const today = new Date().toDateString();
+    const lastAccessDate = localStorage.getItem("lastAccessDate")
+    const today = new Date().toDateString()
 
     if (lastAccessDate !== today) {
-      localStorage.setItem("lastAccessDate", today);
+      localStorage.setItem("lastAccessDate", today)
       if (lastAccessDate) {
-        setTotalVolume(0);
-        setDrinkLogs([]);
-        localStorage.setItem("totalVolume", "0");
-        localStorage.setItem("drinkLogs", JSON.stringify([]));
+        setTotalVolume(0)
+        setDrinkLogs([])
+        localStorage.setItem("totalVolume", "0")
+        localStorage.setItem("drinkLogs", JSON.stringify([]))
       }
     }
-  }, []);
+  }, [])
 
   const handleLogDrink = () => {
     if (selectedVolume) {
-      const newTotal = totalVolume + Number(selectedVolume);
-      setTotalVolume(newTotal);
-      setIsAnimating(true);
+      const newTotal = totalVolume + Number(selectedVolume)
+      setTotalVolume(newTotal)
+      setIsAnimating(true)
 
       const newLog = {
         volume: selectedVolume,
         timestamp: new Date().toISOString(),
-      };
-      setDrinkLogs([...drinkLogs, newLog]);
+      }
+      setDrinkLogs([...drinkLogs, newLog])
 
       if (newTotal >= dailyGoal && totalVolume < dailyGoal) {
-        setShowCelebration(true);
-        triggerCelebration();
+        setShowCelebration(true)
+        triggerCelebration()
       }
 
       setTimeout(() => {
-        setIsAnimating(false);
+        setIsAnimating(false)
         if (showCelebration) {
-          setShowCelebration(false);
+          setShowCelebration(false)
         }
-      }, 1500);
+      }, 1500)
     }
-  };
+  }
 
   const handleSaveSettings = (settings) => {
-    setDailyGoal(settings.dailyGoal);
+    setDailyGoal(settings.dailyGoal)
     if (settings.resetProgress) {
-      setTotalVolume(0);
-      setDrinkLogs([]);
-      localStorage.setItem("totalVolume", "0");
-      localStorage.setItem("drinkLogs", JSON.stringify([]));
+      setTotalVolume(0)
+      setDrinkLogs([])
+      localStorage.setItem("totalVolume", "0")
+      localStorage.setItem("drinkLogs", JSON.stringify([]))
     }
-  };
+  }
 
   const triggerCelebration = () => {
-    const duration = 3 * 1000;
-    const end = Date.now() + duration;
-    const colors = ["#1CABE3", "#1a1a1a", "#2d2d2d"];
+    const duration = 3 * 1000
+    const end = Date.now() + duration
+    const colors = ["#1CABE3", "#1a1a1a", "#2d2d2d"]
 
-    (function frame() {
+    ;(function frame() {
       confetti({
         particleCount: 2,
         angle: 60,
@@ -97,7 +97,7 @@ const DrinkPage = () => {
         origin: { x: 0.5 },
         colors: colors,
         disableForReducedMotion: true,
-      });
+      })
       confetti({
         particleCount: 2,
         angle: 120,
@@ -105,25 +105,25 @@ const DrinkPage = () => {
         origin: { x: 0.5 },
         colors: colors,
         disableForReducedMotion: true,
-      });
+      })
 
       if (Date.now() < end) {
-        requestAnimationFrame(frame);
+        requestAnimationFrame(frame)
       }
-    })();
-  };
+    })()
+  }
 
   const calculateProgress = () => {
-    return Math.min((totalVolume / dailyGoal) * 100, 100).toFixed(1);
-  };
+    return Math.min((totalVolume / dailyGoal) * 100, 100).toFixed(1)
+  }
 
   useEffect(() => {
     return () => {
       if (typeof confetti.reset === "function") {
-        confetti.reset();
+        confetti.reset()
       }
-    };
-  }, []);
+    }
+  }, [])
 
   return (
     <>
@@ -136,7 +136,7 @@ const DrinkPage = () => {
         />
 
         <h1 className="mt-2 text-center text-[#e5e5e5] font-semibold text-lg leading-tight tracking-[-0.015em]">
-          Refresh and Own the Day
+          Refresh & Own The Day
         </h1>
 
         <DrinkProgressCard
@@ -158,7 +158,7 @@ const DrinkPage = () => {
         />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default DrinkPage;
+export default DrinkPage
