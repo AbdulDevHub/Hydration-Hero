@@ -19,7 +19,7 @@ export const DrinkSettingsButton = ({ currentSettings, onSaveSettings }) => {
   const [showModal, setShowModal] = useState(false)
 
   return (
-    <div className="flex w-14 items-center justify-end">
+    <div className="flex w-14 items-center justify-center">
       <button
         onClick={() => setShowModal(true)}
         className="flex cursor-pointer items-center justify-center rounded-full h-4 bg-transparent text-[#e5e5e5] gap-2 font-bold leading-normal tracking-[0.015em] p-0"

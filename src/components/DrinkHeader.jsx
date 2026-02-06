@@ -7,7 +7,7 @@ const DrinkHeader = ({
 }) => {
 
   return (
-    <div className="flex items-center mt-3 p-1 pb-2 justify-between">
+    <div className="flex items-center mt-3 p-1 pb-2 justify-center">
       <DrinkSettingsButton
         show={showSettings}
         onClose={() => setShowSettings(false)}
