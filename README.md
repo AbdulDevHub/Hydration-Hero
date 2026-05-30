@@ -132,6 +132,64 @@ This project uses a consolidated component structure for better maintainability:
 
 ---
 
+## <a name="docker"></a>🐳 Docker
+
+This project is Dockerized for a consistent development and build experience — no need to install Node or pnpm locally.
+
+### How it works
+
+Since this is a Chrome extension (not a web server), Docker isn't used to *run* the extension. Instead it serves two purposes:
+
+- **Build**: Produce the `build/` folder output inside a container, then copy it to your machine
+- **Dev**: Run the Vite dev server inside a container with live file syncing, so you can develop without a local Node environment
+
+The `Dockerfile` defines the environment (Node + pnpm + dependencies). The `docker-compose.yml` defines two named services — `dev` and `build` — so you can target either one on demand.
+
+### Key concepts used here
+
+- **Images vs Containers**: `docker build` creates an image (a frozen snapshot of the environment). `docker run` spins up a temporary container from that image, does its job, and exits. The image is the thing you share; containers are disposable instances of it.
+- **Layer caching**: The Dockerfile copies `package.json` and `pnpm-lock.yaml` before the source code. Docker caches each step, so dependency installs are only re-run when those files change — not on every source code edit.
+- **Volume mounts** (`-v`): Links a folder on your real machine to a path inside the container. Used so the `build/` output written inside the container appears on your host machine, and so source file edits during `dev` are reflected inside the container in real time.
+- **`docker compose up <service>`**: Starts only the named service. `docker compose up dev` starts the dev server; `docker compose up` would start all services simultaneously. Compose also auto-rebuilds the image if the Dockerfile changed, so you rarely need to run `docker build` manually.
+- **Polling for hot reload on Windows**: Vite's file watcher uses native OS events, which don't work across the Windows/Linux boundary when files are volume-mounted. Setting `usePolling: true` in `vite.config.js` tells Vite to check for file changes on a timer instead, which works correctly.
+
+### Docker commands
+
+**Development** (live reloading dev server at `localhost:5173`):
+
+```bash
+docker compose up dev
+```
+
+**Production build** (outputs the `build/` folder to your project):
+
+```bash
+# Windows PowerShell
+docker run --rm -v "${PWD}/build:/app/build" hydration-hero
+
+# Mac/Linux
+docker run --rm -v "$(pwd)/build:/app/build" hydration-hero
+```
+
+Or with compose:
+
+```bash
+docker compose run --rm build
+```
+
+**Share the image without sharing source code:**
+
+```bash
+# Export to a file
+docker save hydration-hero > hydration-hero.tar
+
+# Recipient imports and runs it — only Docker required, no Node/pnpm needed
+docker load < hydration-hero.tar
+docker run --rm -v "${PWD}/build:/app/build" hydration-hero
+```
+
+---
+
 ## <a name="four"></a>🤝 Contributing
 
 This project is open for contributions! Feel free to submit issues and pull requests.

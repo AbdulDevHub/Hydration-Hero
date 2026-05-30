@@ -1,0 +1,15 @@
+services:
+  dev:
+    build: .
+    command: pnpm dev --host
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  build:
+    build: .
+    command: pnpm build
+    volumes:
+      - ./build:/app/build
