@@ -3,7 +3,7 @@
 Hydration Hero is a lightweight Chrome extension for tracking daily water intake and staying on top of your hydration goals—right from your browser.
 
 <p align="center">
-    <img src="https://i.imgur.com/BITNl1q.gif" alt="Hydration Tracker GIF" style="width: 60%; height: auto;">
+    <img src="Demo.gif" alt="Hydration Tracker GIF" style="width: 60%; height: auto;">
 </p>
 
 ---
